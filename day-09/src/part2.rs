@@ -6,8 +6,8 @@ pub fn process(
 ) -> miette::Result<isize, AocError> {
     Ok(input
         .lines()
-        .map(|line| {
-            let mut last_nums = vec![];
+        .flat_map(|line| {
+            let mut last_nums: Vec<isize> = vec![];
             let mut num_line = line
                 .split_whitespace()
                 .rev()
@@ -26,7 +26,7 @@ pub fn process(
 
                 last_nums.push(*num_line.last().unwrap());
             }
-            last_nums.iter().sum::<isize>()
+            last_nums
         })
         .sum())
 }
